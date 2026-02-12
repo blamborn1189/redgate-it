@@ -1,17 +1,23 @@
 ---
-
+import "../styles/global.css";
 ---
-
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>RedGate-IT</title>
+  </head>
+  <body class="bg-black text-white">
+    <main class="mx-auto max-w-5xl p-8">
+      <h1 class="text-5xl font-bold tracking-tight">
+        RedGate-IT
+      </h1>
+      <p class="mt-4 text-white/70">
+        If this text is white and the background is black, Tailwind is working.
+      </p>
+      <button class="mt-6 rounded-xl bg-red-600 px-5 py-3 font-semibold hover:bg-red-500">
+        Book a Consultation
+      </button>
+    </main>
+  </body>
 </html>
