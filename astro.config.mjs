@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://blamborn1189.github.io',
-  base: '/redgate-it',
+  site: 'https://redgate-it.com',
   output: 'static'
 });
