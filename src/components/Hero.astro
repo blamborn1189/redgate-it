@@ -1,61 +1,41 @@
----
-const accent = "#a0001c"; // your brand red (used in glow only; buttons use Tailwind)
----
-
 <section class="relative overflow-hidden">
   <div class="absolute inset-0 -z-10">
     <video
-      class="h-full w-full object-cover opacity-40"
+      class="h-full w-full object-cover opacity-35"
       autoplay
       muted
       loop
       playsinline
       preload="metadata"
-      poster="/video/hero-poster.jpg"
     >
       <source src="/video/hero.mp4" type="video/mp4" />
     </video>
 
-    <!-- dark overlay to ensure readability -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/75 via-black/70 to-black"></div>
-
-    <!-- brand glow -->
-    <div class="absolute -top-24 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full blur-3xl"
-      style={`background: ${accent}1a;`}
-    ></div>
+    <!-- dark overlay so text reads -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black"></div>
   </div>
 
   <div class="mx-auto max-w-6xl px-6 py-20 sm:py-28">
-    <div class="max-w-2xl">
-      <p class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-white/80">
-        <span class="h-2 w-2 rounded-full bg-red-600"></span>
-        Modern MSP for small businesses
-      </p>
+    <p class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-white/80">
+      <span class="h-2 w-2 rounded-full bg-red-600"></span>
+      Managed IT for growth-minded local businesses
+    </p>
 
-      <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-6xl">
-        IT that stays out of your way — and keeps you protected.
-      </h1>
+    <h1 class="mt-6 max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">
+      Modern IT support that keeps your business moving.
+    </h1>
 
-      <p class="mt-5 text-lg leading-relaxed text-white/70">
-        RedGate-IT helps growth-minded local businesses modernize their networks, secure their devices, and move confidently to Microsoft 365.
-      </p>
+    <p class="mt-5 max-w-2xl text-lg leading-relaxed text-white/70">
+      RedGate-IT helps small teams modernize their networks, improve security, and move confidently to Microsoft 365.
+    </p>
 
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-        <a href="#contact" class="inline-flex items-center justify-center rounded-xl bg-red-600 px-5 py-3 font-semibold hover:bg-red-500">
-          Book a consultation
-        </a>
-        <a href="#services" class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white/90 hover:bg-white/10">
-          View services
-        </a>
-      </div>
-
-      <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/60">
-        <span>Security-first</span>
-        <span>•</span>
-        <span>Ubiquiti network modernization</span>
-        <span>•</span>
-        <span>Microsoft 365 migrations</span>
-      </div>
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a href="#contact" class="inline-flex items-center justify-center rounded-xl bg-red-600 px-5 py-3 font-semibold hover:bg-red-500">
+        Book a consultation
+      </a>
+      <a href="#services" class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white/90 hover:bg-white/10">
+        View services
+      </a>
     </div>
   </div>
 </section>

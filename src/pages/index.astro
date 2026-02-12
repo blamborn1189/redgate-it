@@ -1,15 +1,17 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
+import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
 ---
 
-<SiteLayout title="RedGate-IT | Managed IT Services" description="Modern MSP services for small local businesses.">
+<SiteLayout title="RedGate-IT | Managed IT Services">
+  <Nav />
   <Hero />
 
   <section id="services" class="mx-auto max-w-6xl px-6 py-16">
     <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Core services</h2>
     <p class="mt-3 max-w-2xl text-white/70">
-      Start with a clean, confident foundation — then layer on security and productivity.
+      Everything you need to run a secure, modern small business — without enterprise complexity.
     </p>
 
     <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -19,24 +21,33 @@ import Hero from "../components/Hero.astro";
       </div>
       <div class="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10">
         <h3 class="text-lg font-semibold">Cybersecurity</h3>
-        <p class="mt-2 text-white/70">Endpoint protection, MFA, email security, and policies.</p>
+        <p class="mt-2 text-white/70">MFA, endpoint protection, email security, and policies.</p>
       </div>
       <div class="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10">
         <h3 class="text-lg font-semibold">Microsoft 365</h3>
-        <p class="mt-2 text-white/70">Migrations, identity, backup, and collaboration setup.</p>
+        <p class="mt-2 text-white/70">Migration, identity, backup, and collaboration setup.</p>
       </div>
       <div class="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10">
         <h3 class="text-lg font-semibold">Network Modernization</h3>
-        <p class="mt-2 text-white/70">Ubiquiti design, secure VLANs, Wi-Fi performance.</p>
+        <p class="mt-2 text-white/70">Ubiquiti design, secure VLANs, Wi-Fi optimization.</p>
       </div>
       <div class="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10">
-        <h3 class="text-lg font-semibold">Cloud Backup</h3>
-        <p class="mt-2 text-white/70">Business continuity and recoverability.</p>
+        <h3 class="text-lg font-semibold">Backup & Recovery</h3>
+        <p class="mt-2 text-white/70">Business continuity and ransomware recovery readiness.</p>
       </div>
       <div class="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10">
         <h3 class="text-lg font-semibold">Onboarding & Audits</h3>
-        <p class="mt-2 text-white/70">Know where you stand, then improve fast.</p>
+        <p class="mt-2 text-white/70">Find gaps fast, then fix them with a clear plan.</p>
       </div>
+    </div>
+  </section>
+
+  <section id="about" class="border-t border-white/10">
+    <div class="mx-auto max-w-6xl px-6 py-16">
+      <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Built for local businesses</h2>
+      <p class="mt-3 max-w-3xl text-white/70">
+        RedGate-IT is designed for small teams that want enterprise-grade security, stable networks, and modern collaboration — with friendly support.
+      </p>
     </div>
   </section>
 
@@ -44,20 +55,19 @@ import Hero from "../components/Hero.astro";
     <div class="mx-auto max-w-6xl px-6 py-16">
       <div class="rounded-2xl border border-white/10 bg-white/5 p-8">
         <h2 class="text-2xl font-bold tracking-tight">Talk to RedGate-IT</h2>
-        <p class="mt-2 text-white/70">Tell us what you have today and what you want to improve.</p>
+        <p class="mt-2 text-white/70">Tell us what you’re using today and what you want to improve.</p>
+
         <div class="mt-6 grid gap-3 sm:grid-cols-2">
-          <input class="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40"
-            placeholder="Name" />
-          <input class="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40"
-            placeholder="Email" />
-          <input class="sm:col-span-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40"
-            placeholder="Company (optional)" />
-          <textarea class="sm:col-span-2 min-h-[120px] w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40"
-            placeholder="What do you need help with?"></textarea>
+          <input class="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40" placeholder="Name" />
+          <input class="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40" placeholder="Email" />
+          <input class="sm:col-span-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40" placeholder="Company (optional)" />
+          <textarea class="sm:col-span-2 min-h-[120px] w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40" placeholder="What do you need help with?"></textarea>
         </div>
+
         <button class="mt-5 rounded-xl bg-red-600 px-5 py-3 font-semibold hover:bg-red-500">
           Request a consultation
         </button>
+
         <p class="mt-3 text-sm text-white/50">We’ll reply within 1 business day.</p>
       </div>
 
