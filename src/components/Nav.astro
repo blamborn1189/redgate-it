@@ -1,20 +1,124 @@
-<header class="fixed top-2 left-0 right-0 z-50 px-2">
-<div class="flex h-14 sm:h-18 items-center justify-between rounded-xl border border-white/10 bg-black/85 backdrop-blur pr-3">
-    <a href="/" class="flex items-center ml-2 md:ml-3">
-      <img 
-        src="/images/redgate_logo.png" 
-        alt="RedGate-IT" 
-        class="h-10 sm:h-12 w-auto"
-      />
-    </a>
-
-    <nav class="hidden items-center gap-6 text-sm text-white/80 sm:flex">
-      <a class="hover:text-white" href="#services">Managed Services</a>
-      <a class="hover:text-white" href="#about">About</a>
-      <a class="hover:text-white" href="#contact">Contact</a>
-      <a class="rounded-xl bg-[#a0001c] px-4 py-2 font-semibold text-white hover:bg-red-500" href="#contact">
-        Get started
+<header class="fixed top-0 left-0 right-0 z-50">
+  <!-- Full-width bar so the bottom line hits the edges -->
+  <div class="relative z-50 border-b border-white/10 bg-black/85 backdrop-blur">
+    <!-- Inner container matches hero: max-w-6xl + px-6 -->
+    <div class="mx-auto flex h-18 sm:h-18 max-w-6xl items-center justify-between px-6 pr-3">
+      <!-- Logo -->
+      <a href="/" class="flex items-center">
+        <img
+          src="/images/redgate_logo.png"
+          alt="RedGate-IT"
+          class="h-10 sm:h-12 w-auto"
+        />
       </a>
-    </nav>
+
+      <!-- Desktop nav -->
+      <nav class="hidden items-center gap-6 text-sm text-white/80 sm:flex">
+        <a class="hover:text-white" href="#services">Managed Services</a>
+        <a class="hover:text-white" href="#about">About</a>
+        <a class="hover:text-white" href="#contact">Contact</a>
+        <a
+          class="rounded-xl bg-[#a0001c] px-4 py-2 font-semibold text-white hover:bg-red-500"
+          href="#contact"
+        >
+          Get started
+        </a>
+      </nav>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="mobileMenuBtn"
+        class="sm:hidden relative inline-flex h-10 w-10 items-center justify-center text-white"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+        type="button"
+      >
+        <span class="sr-only">Toggle menu</span>
+
+        <span
+          id="line1"
+          class="absolute h-[1.5px] w-4 bg-white transition-transform duration-150 ease-[cubic-bezier(.4,0,.2,1)]"
+          style="transform: translateY(-4px) rotate(0);"
+        ></span>
+
+        <span
+          id="line2"
+          class="absolute h-[1.5px] w-4 bg-white transition-transform duration-150 ease-[cubic-bezier(.4,0,.2,1)]"
+          style="transform: translateY(4px) rotate(0);"
+        ></span>
+      </button>
+    </div>
   </div>
+
+  <!-- Mobile overlay menu -->
+  <div
+    id="mobileMenu"
+    class="sm:hidden fixed inset-0 top-18 opacity-0 pointer-events-none transition-opacity duration-200 ease-out bg-black/92 backdrop-blur"
+  >
+    <div class="mx-auto max-w-6xl px-6 pt-6">
+      <nav class="flex flex-col text-lg text-white/90">
+        <a class="py-1 hover:text-white" href="#services">Managed Services</a>
+        <a class="py-1 hover:text-white" href="#about">About</a>
+        <a class="py-1 hover:text-white" href="#contact">Contact</a>
+
+        <a
+          class="mt-6 inline-flex items-center justify-center rounded-xl bg-[#a0001c] px-4 py-3 font-semibold text-white hover:bg-red-500"
+          href="#contact"
+        >
+          Get started
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <script is:inline>
+    const btn = document.getElementById("mobileMenuBtn");
+    const menu = document.getElementById("mobileMenu");
+    const line1 = document.getElementById("line1");
+    const line2 = document.getElementById("line2");
+
+    function lockScroll(lock) {
+      document.documentElement.classList.toggle("overflow-hidden", lock);
+      document.body.classList.toggle("overflow-hidden", lock);
+    }
+
+    function closeMenu() {
+      menu.classList.remove("opacity-100", "pointer-events-auto");
+      menu.classList.add("opacity-0", "pointer-events-none");
+      btn.setAttribute("aria-expanded", "false");
+      lockScroll(false);
+
+      if (line1) line1.style.transform = "translateY(-4px) rotate(0)";
+      if (line2) line2.style.transform = "translateY(4px) rotate(0)";
+    }
+
+    btn?.addEventListener("click", () => {
+      const open = menu.classList.contains("opacity-100");
+
+      if (open) {
+        closeMenu();
+      } else {
+        menu.classList.remove("opacity-0", "pointer-events-none");
+        menu.classList.add("opacity-100", "pointer-events-auto");
+        btn.setAttribute("aria-expanded", "true");
+        lockScroll(true);
+
+        if (line1) line1.style.transform = "translateY(0) rotate(45deg)";
+        if (line2) line2.style.transform = "translateY(0) rotate(-45deg)";
+      }
+    });
+
+    menu?.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", closeMenu);
+    });
+
+    menu?.addEventListener("click", (e) => {
+      if (e.target === menu) closeMenu();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.classList.contains("opacity-100")) closeMenu();
+    });
+  </script>
 </header>
