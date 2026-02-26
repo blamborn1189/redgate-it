@@ -160,8 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const touched = { name: false, email: false, message: false };
 
   const setFieldState = (el, errorEl, isValid) => {
-  // Keep border the same
-  errorEl.classList.toggle("hidden", isValid);
+    // Keep border the same
+    errorEl.classList.toggle("hidden", isValid);
   };
 
   const validateName = () => {
@@ -172,8 +172,14 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const validateEmail = () => {
-    // Uses browser's built-in email validity
-    const ok = emailEl.value.trim().length > 0 && emailEl.checkValidity();
+    const val = emailEl.value.trim();
+
+    // Stricter email check: requires a dot in the domain (blocks "choni@gmail")
+    const strictOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+    // Keep the browser's built-in validity too
+    const ok = val.length > 0 && emailEl.checkValidity() && strictOk;
+
     if (touched.email) setFieldState(emailEl, emailError, ok);
     return ok;
   };
