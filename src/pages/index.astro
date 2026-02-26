@@ -17,8 +17,6 @@ import Hero from "../components/Hero.astro";
     </div>
   </section>
 
-
-
   <section id="services" class="mx-auto max-w-6xl px-6 pt-25 sm:pt-35 py-16">
     <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Core services</h2>
     <p class="mt-3 max-w-2xl text-white/70">
@@ -54,11 +52,10 @@ import Hero from "../components/Hero.astro";
   </section>
 
   <section id="about" class="mx-auto max-w-6xl px-6 py-16">
-      <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Built for local businesses</h2>
-      <p class="mt-3 max-w-3xl text-white/70">
-        RedGate-IT is designed for small teams that want enterprise-grade security, stable networks, and modern collaboration — with friendly support.
-      </p>
-    </div>
+    <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Built for local businesses</h2>
+    <p class="mt-3 max-w-3xl text-white/70">
+      RedGate-IT is designed for small teams that want enterprise-grade security, stable networks, and modern collaboration — with friendly support.
+    </p>
   </section>
 
   <section id="contact" class="mx-auto max-w-6xl px-6 py-16">
@@ -66,10 +63,8 @@ import Hero from "../components/Hero.astro";
       <h2 class="text-2xl font-bold tracking-tight">Talk to RedGate-IT</h2>
       <p class="mt-2 text-white/70">Tell us what you’re using today and what you want to improve.</p>
 
-      <!-- FORM START -->
       <form id="contactForm" class="mt-6">
         <div class="grid gap-3 sm:grid-cols-2">
-
           <input
             id="name"
             required
@@ -97,7 +92,15 @@ import Hero from "../components/Hero.astro";
             class="sm:col-span-2 min-h-[120px] w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40"
             placeholder="What do you need help with?"
           ></textarea>
+        </div>
 
+        <!-- Turnstile -->
+        <div class="mt-4">
+          <div
+            class="cf-turnstile"
+            data-sitekey="0x4AAAAAACiUq94vEPkE1FRE"
+            data-theme="dark"
+          ></div>
         </div>
 
         <button
@@ -109,8 +112,6 @@ import Hero from "../components/Hero.astro";
 
         <p id="formStatus" class="mt-3 text-sm text-white/50"></p>
       </form>
-      <!-- FORM END -->
-
     </div>
 
     <footer class="mt-12 text-sm text-white/50">
@@ -118,38 +119,67 @@ import Hero from "../components/Hero.astro";
     </footer>
   </section>
 
+  <!-- Turnstile script -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
   <script>
-  document.getElementById("contactForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contactForm");
     const status = document.getElementById("formStatus");
-    status.textContent = "Sending...";
 
-    const payload = {
-      name: document.getElementById("name").value,
-      email: document.getElementById("email").value,
-      company: document.getElementById("company").value,
-      message: document.getElementById("message").value,
-    };
+    if (!form || !status) return;
 
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-      if (res.ok) {
-        status.textContent = "Sent! We’ll reply within 1 business day.";
-        e.target.reset();
-      } else {
-        status.textContent = "Something went wrong. Please try again.";
+      status.textContent = "Sending...";
+
+      const nameEl = document.getElementById("name");
+      const emailEl = document.getElementById("email");
+      const companyEl = document.getElementById("company");
+      const messageEl = document.getElementById("message");
+
+      if (!nameEl || !emailEl || !companyEl || !messageEl) {
+        status.textContent = "Form error: missing fields.";
+        return;
       }
-    } catch (err) {
-      status.textContent = "Network error. Please try again.";
-    }
+
+      const tokenEl = form.querySelector('input[name="cf-turnstile-response"]');
+      const turnstileToken = tokenEl ? tokenEl.value : "";
+
+      if (!turnstileToken) {
+        status.textContent = "Please complete the verification and try again.";
+        return;
+      }
+
+      const payload = {
+        name: nameEl.value,
+        email: emailEl.value,
+        company: companyEl.value,
+        message: messageEl.value,
+        turnstileToken,
+      };
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          status.textContent = "Sent! We’ll reply within 1 business day.";
+          form.reset();
+          if (window.turnstile) window.turnstile.reset();
+        } else {
+          status.textContent = "Something went wrong. Please try again.";
+          if (window.turnstile) window.turnstile.reset();
+        }
+      } catch (err) {
+        status.textContent = "Network error. Please try again.";
+        if (window.turnstile) window.turnstile.reset();
+      }
+    });
   });
   </script>
 </SiteLayout>
